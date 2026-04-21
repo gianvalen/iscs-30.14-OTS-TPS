@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://pgatlr182e0w"]
+
+[ext_resource type="Script" uid="uid://ckqcv8tqaojs8" path="res://player/player.gd" id="1_oul6g"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kqu6x"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_oul6g"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oul6g"]
+albedo_color = Color(0.09411765, 0.003921569, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rkbax"]
+material = SubResource("StandardMaterial3D_oul6g")
+size = Vector3(0.1, 0.1, 0.6)
+
+[node name="Player" type="CharacterBody3D" unique_id=1850928458]
+script = ExtResource("1_oul6g")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=486589868]
+shape = SubResource("CapsuleShape3D_kqu6x")
+
+[node name="PlayerModel" type="Node3D" parent="." unique_id=104268882]
+
+[node name="Body" type="MeshInstance3D" parent="PlayerModel" unique_id=886832214]
+mesh = SubResource("CapsuleMesh_oul6g")
+
+[node name="GunPivot" type="Node3D" parent="PlayerModel" unique_id=1653436113]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.3, -0.3)
+
+[node name="Gun" type="MeshInstance3D" parent="PlayerModel/GunPivot" unique_id=1662624823]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.2)
+mesh = SubResource("BoxMesh_rkbax")
+
+[node name="Muzzle" type="Marker3D" parent="PlayerModel/GunPivot" unique_id=521324704]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+
+[node name="CameraPivot" type="Node3D" parent="." unique_id=811541128]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot" unique_id=685955806]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 0.3, 2.8)
+
+[node name="AimRay" type="RayCast3D" parent="CameraPivot/Camera3D" unique_id=671045599]
+target_position = Vector3(0, 0, -100)
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=241476454]
+
+[node name="Crosshair" type="Control" parent="HUD" unique_id=1618265794]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Top" type="ColorRect" parent="HUD/Crosshair" unique_id=1060316165]
+layout_mode = 0
+offset_left = -1.0
+offset_top = -10.0
+offset_right = 1.0
+offset_bottom = -2.0
+
+[node name="Bottom" type="ColorRect" parent="HUD/Crosshair" unique_id=206053124]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 3.0
+offset_right = 1.0
+offset_bottom = 11.0
+
+[node name="Left" type="ColorRect" parent="HUD/Crosshair" unique_id=1426635963]
+layout_mode = 0
+offset_left = -10.0
+offset_top = -1.0
+offset_right = -2.0
+offset_bottom = 1.0
+
+[node name="Right" type="ColorRect" parent="HUD/Crosshair" unique_id=1548668003]
+layout_mode = 0
+offset_left = 3.0
+offset_top = -1.0
+offset_right = 11.0
+offset_bottom = 1.0

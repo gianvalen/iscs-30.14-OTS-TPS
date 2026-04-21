@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://d1aeegs4tkn38"]
+
+[ext_resource type="Script" uid="uid://dyp3qka2c50rg" path="res://explosion/explosion.gd" id="1_echoh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pim3w"]
+albedo_color = Color(0.6121191, 0.2990217, 0.07795326, 1)
+emission_enabled = true
+emission = Color(0.99999994, 0.51472306, 0.22745916, 1)
+emission_energy_multiplier = 3.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_mp546"]
+material = SubResource("StandardMaterial3D_pim3w")
+radius = 0.3
+height = 0.6
+
+[node name="Explosion" type="Node3D" unique_id=407770317]
+script = ExtResource("1_echoh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1665858441]
+mesh = SubResource("SphereMesh_mp546")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=554350914]
+light_color = Color(0.78177375, 0.3001913, 0.09236198, 1)
+light_energy = 5.0
