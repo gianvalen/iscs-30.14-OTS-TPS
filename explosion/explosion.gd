@@ -13,7 +13,7 @@ func init(is_big: bool):
 
 func _process(delta):
 	timer += delta
-	# Grow and fade out
+	# Slowly shrink the explosion over time
 	var t = timer / lifetime
 	scale = scale.lerp(Vector3.ZERO, t * delta * 10)
 

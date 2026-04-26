@@ -13,11 +13,11 @@ func _ready():
 	area_entered.connect(_on_area_entered)
 
 func _physics_process(delta):
-	# Move projectile forward each frame (short raycast-style steps)
+	# Move projectile forward every frame
 	var move_amount = direction * SPEED * delta
 	global_position += move_amount
 
-	# Destroy if travelled too far
+	# Remove projectile if it goes too far	
 	if global_position.distance_to(start_position) > MAX_DISTANCE:
 		queue_free()
 

@@ -8,7 +8,7 @@ func _ready():
 
 func take_hit():
 	health -= 1
-	# Flash white to show damage
+	# Make the enemy flash white when it gets hit
 	var mesh = $MeshInstance3D
 	var mat = mesh.get_active_material(0)
 	mat.albedo_color = Color.WHITE

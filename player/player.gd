@@ -99,7 +99,7 @@ func _aim_gun():
 		target_point = camera.global_position + \
 			(-camera.global_transform.basis.z * 100.0)
 
-	# Smoothly rotate gun to look at target
+	# Rotate gun smoothly towards target
 	var gun_world_pos = gun_pivot.global_position
 	var aim_dir = (target_point - gun_world_pos).normalized()
 
