@@ -7,17 +7,17 @@ extends CharacterBody3D
 @onready var gun_pivot = $PlayerModel/GunPivot
 @onready var muzzle = $PlayerModel/GunPivot/Muzzle
 
-# --- Movement ---
+# Movement
 const SPEED = 6.0
 const GRAVITY = 20.0
 
-# --- Camera ---
+# Camera
 const MOUSE_SENS = 0.003
 const PITCH_MIN = -0.6
 const PITCH_MAX = 0.5
 var pitch = 0.0
 
-# --- OTS Camera offsets ---
+# OTS Camera offsets
 const CAM_RIGHT = Vector3(0.7, 0.3, 2.8)
 const CAM_LEFT  = Vector3(-0.7, 0.3, 2.8)
 const CAM_AIM   = Vector3(0.4, 0.2, 1.6)
@@ -25,7 +25,7 @@ var shoulder_right = true
 var is_aiming = false
 var cam_target = Vector3(0.7, 0.3, 2.8)
 
-# --- Shooting ---
+# Shooting
 const FIRE_RATE = 0.3
 var can_shoot = true
 var projectile_scene = preload("res://projectile/projectile.tscn")
@@ -44,11 +44,11 @@ func _unhandled_input(event):
 		shoulder_right = !shoulder_right
 
 func _physics_process(delta):
-	# --- Gravity ---
+	# Gravity
 	if not is_on_floor():
 		velocity.y -= GRAVITY * delta
 
-	# --- Movement ---
+	# Movement
 	var input = Vector2(
 		Input.get_axis("ui_left", "ui_right"),
 		Input.get_axis("ui_up", "ui_down")
@@ -68,7 +68,7 @@ func _physics_process(delta):
 	velocity.z = move_dir.z * SPEED
 	move_and_slide()
 
-	# --- Camera offset smooth switch ---
+	# Camera offset smooth switch
 	is_aiming = Input.is_action_pressed("aim")
 	if is_aiming:
 		cam_target = CAM_AIM
@@ -78,10 +78,10 @@ func _physics_process(delta):
 		cam_target = CAM_LEFT
 	camera.position = camera.position.lerp(cam_target, 10.0 * delta)
 
-	# --- Gun aims at crosshair target ---
+	# Gun aims at crosshair target
 	_aim_gun()
 
-	# --- Shooting ---
+	# Shooting
 	if Input.is_action_pressed("shoot") and can_shoot:
 		shoot()
 		can_shoot = false
